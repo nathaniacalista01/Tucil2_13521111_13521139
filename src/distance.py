@@ -23,13 +23,8 @@ def nearest_points(points):
             nearest = nearest_left
         else:
             left_d = distance(nearest_left[0],nearest_left[1])
-            print('left:')
-            print(left_d)
-            print(nearest_left)
             right_d = distance(nearest_right[0],nearest_right[1])
-            print('right:')
-            print(right_d)
-            print(nearest_right)
+
             if (right_d < left_d):
                 min = right_d
                 nearest = nearest_right
@@ -45,9 +40,6 @@ def nearest_points(points):
             for i in range (n_mid):
                 for j in range (i+1, n_mid):
                     d = distance(mid[i], mid[j])
-                    print(mid[i],mid[j])
-                    print('d:')
-                    print(d)
                     if (d < min):
                         nearest = [mid[i],mid[j]]
                         min = d

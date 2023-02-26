@@ -1,7 +1,17 @@
 import randomizer as r
 import distance as d
+import plot as p
 
-points = r.randomizer(5,3)
-print(points)
+n = int(input("Please input the number of points: "))
+dim = int(input("Please input the dimension: "))
 
-print(d.nearest_points(points))
+points = r.randomizer(n,dim)
+print("Your random points are: ")
+for i in range(n):
+    print(points[i])
+
+nearest = d.nearest_points(points)
+print("Your nearest pair of points are: ")
+print(nearest)
+
+p.plot(dim,points,nearest)
