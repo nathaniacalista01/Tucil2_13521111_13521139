@@ -1,8 +1,11 @@
 import math
+import sort as s
 
+# Rumus untuk menghitung jarak
 def distance(p1,p2):
     return math.sqrt(sum([(p1[i] - p2[i])**2 for i in range(len(p1))]))
 
+#Rumus mencari nearest points 
 def nearest_points(points):
     n = len(points)
     if (n <= 1):
@@ -10,9 +13,8 @@ def nearest_points(points):
     elif (n == 2):
         return points
     else:
-        sorted_points = sorted(points, key=lambda p: p[0])
-        left = sorted_points[:(n//2)]
-        right = sorted_points[(n//2):]
+        left = points[:(n//2)]
+        right = points[(n//2):]
 
         nearest_left = nearest_points(left)
         nearest_right = nearest_points(right)
@@ -32,9 +34,8 @@ def nearest_points(points):
                 min = left_d
                 nearest = nearest_left
 
-            
             center = (left[-1][0] + right[0][0]) / 2
-            mid = [point for point in sorted_points if(abs(point[0] - center) < min)]
+            mid = [point for point in points if(abs(point[0] - center) < min)]
             n_mid = len(mid)
 
             for i in range (n_mid):
