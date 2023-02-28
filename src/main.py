@@ -27,13 +27,14 @@ if(options == "y" or options == "Y"):
 # Divide and Conquer
 sorted = s.merge_sort(points)
 st = tm.perf_counter_ns()
-nearest = d.nearest_points(sorted)
+nearest, count = d.nearest_points(sorted)
 et = tm.perf_counter_ns()
 
 print("================ Divide and Conquer Solution ================")
 print("Your nearest points are : ")
 print(nearest)
 print("Distance : ", d.distance(nearest[0],nearest[1]))
+print("Euclidean distance computation count : ", count)
 print("Execution time : {0:.2f} ".format((et-st)/1000),"miliseconds")
 print("============================================================")
 print()
@@ -42,13 +43,14 @@ p.plot(dim,points,nearest)
 
 # Brute Force
 st2 = tm.perf_counter_ns()
-nearest2 = b.nearest_points(points)
+nearest2, count2 = b.nearest_points(points)
 et2 = tm.perf_counter_ns()
 
 print("================ Brute Force Solution ================")
 print("Your nearest points are : ")
 print(nearest2)
 print("Distance : ", d.distance(nearest2[0],nearest2[1]))
+print("Euclidean distance computation count : ", count2)
 print("Execution time : {0:.2f} ".format((et2-st2)/1000),"miliseconds")
 print("=============================================================")
 

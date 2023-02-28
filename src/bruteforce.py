@@ -4,9 +4,11 @@ def nearest_points(points):
     n = len(points)
     nearest2 = [points[0],points[1]]
     min2 = d.distance(points[0],points[1])
+    count = 1
     for i in range(n):
         for j in range(i+1,n):
+            count += 1
             if d.distance(points[i],points[j]) < min2:
                 min2 = d.distance(points[i],points[j])
                 nearest2 = [points[i],points[j]]
-    return nearest2
+    return nearest2, count

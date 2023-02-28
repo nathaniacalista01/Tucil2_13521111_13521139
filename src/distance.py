@@ -7,17 +7,20 @@ def distance(p1,p2):
 
 #Rumus mencari nearest points 
 def nearest_points(points):
+    count = 0
     n = len(points)
     if (n <= 1):
-        return None
+        return None, count
     elif (n == 2):
-        return points
+        return points, count
     else:
         left = points[:(n//2)]
         right = points[(n//2):]
 
-        nearest_left = nearest_points(left)
-        nearest_right = nearest_points(right)
+        nearest_left, countleft = nearest_points(left)
+        nearest_right, countright = nearest_points(right)
+
+        count = count + countleft + countright
 
         if (nearest_left is None):
             nearest = nearest_right
@@ -26,6 +29,7 @@ def nearest_points(points):
         else:
             left_d = distance(nearest_left[0],nearest_left[1])
             right_d = distance(nearest_right[0],nearest_right[1])
+            count += 2
 
             if (right_d < left_d):
                 min = right_d
@@ -41,7 +45,8 @@ def nearest_points(points):
             for i in range (n_mid):
                 for j in range (i+1, n_mid):
                     d = distance(mid[i], mid[j])
+                    count += 1
                     if (d < min):
                         nearest = [mid[i],mid[j]]
                         min = d
-        return nearest
+        return nearest, count
