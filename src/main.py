@@ -2,31 +2,46 @@ import randomizer as r
 import distance as d
 import plot as p
 import sort as s
-import time
+import input as i
+import coretan as t
+import time as tm
 
-n = int(input("Please input the number of points: "))
-while n < 2:
-    print("A minimum number of 2 points is needed!")
-    n = int(input("Please input the number of points: "))
-
-dim = int(input("Please input the dimension: "))
-while n < 1:
-    print("The smallest dimension possible is 1.")
-    dim = int(input("Please input the dimension: "))
+i.welcomeMsg()
+n,dim = i.inputUser()
 
 points = r.randomizer(n,dim)
 print("Your random points are: ")
 for i in range(n):
     print(points[i])
 
+# Divide and Conquer
 sorted = s.merge_sort(points)
-start = time.time()
+st = tm.perf_counter_ns()
 nearest = d.nearest_points(sorted)
-end = time.time()
-print("Your nearest pair of points are: ", end="")
-print(nearest)
+et = tm.perf_counter_ns()
 
-print("Runtime: ", end="")
-print(end-start)
+print("===== Divide and Conquer Solution =====")
+print("Your nearest points are : ",nearest)
+print("Distance : ", d.distance(nearest[0],nearest[1]))
+print("Execution time : {0:.2f} ".format((et-st)/1000),"miliseconds")
 
 p.plot(dim,points,nearest)
+
+# Brute Force
+st2 = tm.perf_counter_ns()
+nearest2 = [points[0],points[1]]
+min2 = d.distance(points[0],points[1])
+
+for i in range(n):
+    for j in range(i+1,n):
+        if d.distance(points[i],points[j]) < min2:
+            min2 = d.distance(points[i],points[j])
+            nearest2 = [points[i],points[j]]
+et2 = tm.perf_counter_ns()
+
+print("===== Brute Force Solution =====")
+print("Your nearest points are : ",nearest2)
+print("Distance : ", d.distance(nearest2[0],nearest2[1]))
+print("Execution time : {0:.2f} ".format((et2-st2)/1000),"miliseconds")
+
+p.plot(dim,points,nearest2)

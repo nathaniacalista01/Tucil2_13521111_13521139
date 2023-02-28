@@ -9,7 +9,7 @@ def merge_sort(arr):
         left_arr = merge_sort(left_arr)
         right_arr = merge_sort(right_arr)
         return merge(left_arr,right_arr)
-
+    
 def merge(left_arr, right_arr):
     sorted_arr = []
     left_index = 0
@@ -24,4 +24,4 @@ def merge(left_arr, right_arr):
 
     sorted_arr += left_arr[left_index:]
     sorted_arr += right_arr[right_index:]
-    return sorted_arr
+    return sorted_arr    
